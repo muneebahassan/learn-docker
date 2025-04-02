@@ -1,0 +1,26 @@
+services:
+  web:
+    build: ./app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    networks:
+      - my_network
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: mydb
+    networks:
+      - my_network
+    volumes:
+      - db_data:/var/lib/mysql
+
+networks:
+  my_network:
+
+volumes:
+  db_data:
+
